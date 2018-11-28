@@ -12,8 +12,8 @@ public:
     Chair() {};
     void setMotors(Motor &lhs, Motor &rhs);
     void begin();
-    void forward(int &throttle);
-    void reverse(int &throttle);
+    void forward(int &throttle, int &steering);
+    void reverse(int &throttle, int &steering);
     void right(int &throttle);
     void left(int &throttle);
     void off();
@@ -32,8 +32,8 @@ Chair::Chair(Motor &lftMotor, Motor &rtMotor)
 
 void Chair::setMotors(Motor &lhs, Motor &rhs)
 {
-  this->rtMotor = &rhs;
-  this->lftMotor = &lhs;
+    this->rtMotor = &rhs;
+    this->lftMotor = &lhs;
 }
 
 void Chair::begin()
@@ -42,25 +42,52 @@ void Chair::begin()
     this->lftMotor->begin();
 }
 
-void Chair::forward(int &throttle)
+void Chair::forward(int &throttle, int &steering)
 {
-     this->lftMotor->setThrottle(throttle);
-    this->rtMotor->setThrottle(throttle);
+    if (steering > 0)
+    {
+      this->rtMotor->setThrottle(throttle - steering);
+      this->lftMotor->setThrottle(throttle);
+    }
+    else if (steering < 0)
+    {
+      this->lftMotor->setThrottle(throttle + steering);
+      this->rtMotor->setThrottle(throttle);
+    }
+    else
+    {
+      this->lftMotor->setThrottle(throttle);
+      this->rtMotor->setThrottle(throttle);
+    }
+    
     this->lftMotor->forward();
     this->rtMotor->forward();
 }
 
-void Chair::reverse(int &throttle)
+void Chair::reverse(int &throttle, int &steering)
 {
-    this->lftMotor->setThrottle(throttle);
-    this->rtMotor->setThrottle(throttle);
+    if (steering > 0)
+    {
+      this->rtMotor->setThrottle(throttle - steering);
+      this->lftMotor->setThrottle(throttle);
+    }
+    else if (steering < 0)
+    {
+      this->lftMotor->setThrottle(throttle + steering);
+      this->rtMotor->setThrottle(throttle);
+    }
+    else
+    {
+      this->lftMotor->setThrottle(throttle);
+      this->rtMotor->setThrottle(throttle);
+    }
     this->lftMotor->reverse();
     this->rtMotor->reverse();
 }
 
 void Chair::right(int &throttle)
 {
-     this->lftMotor->setThrottle(throttle);
+    this->lftMotor->setThrottle(throttle);
     this->rtMotor->setThrottle(throttle);
     this->lftMotor->forward();
     this->rtMotor->reverse();

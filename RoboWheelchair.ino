@@ -31,6 +31,7 @@
 ///LIBRARIES////////////////
 #include <SoftwareSerial.h>
 #include <ArduinoBlue.h>
+#include <avr/sleep.h>
 #include "motor.h"
 #include "chair.h"
 ///////////////////////////
@@ -39,7 +40,7 @@
 //Right Motor
 Motor rtMotor(/*rLow*/8,/*rHi*/9,/*rEnable*/10);
 //Left Motor 
-Motor lftMotor(/*rLow*/7,/*rHi*/6,/*rEnable*/9);
+Motor lftMotor(/*rLow*/7,/*rHi*/6,/*rEnable*/5);
 Chair chair(lftMotor, rtMotor);
 
 // throttle and steering 
@@ -77,6 +78,10 @@ void setup()
   Serial.println("Chair is ready");
 ///////////////////////////////////////
 
+///SLEEP SETTINGS//////////////////////
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+///////////////////////////////////////
+
 ///SETUP INTERUPTS/////////////////////
 //  attachInterrupt(digitalPinToInterrupt(3), moveChair, CHANGE);
 ///////////////////////////////////////
@@ -89,18 +94,25 @@ void moveChair()
     if(throttle < 15)
     {
       throttle *= -1;
-      chair.reverse(throttle);
+      chair.reverse(throttle, steering);
     }
-    if (throttle > 15)
-      chair.forward(throttle);
-
+    else if (throttle > 15)
+      chair.forward(throttle, steering);
+    else if (throttle < 15 && throttle > -15 && throttle != 0)
+    {
+      delay(200);
+    }
+    else
+    {
+      sleep_mode();
+    }
 }
 
 void loop()
 {
   prevThrottle = throttle;
   prevSteering = steering;
- throttle = ((phone.getThrottle()) - 49) * 4;
+  throttle = ((phone.getThrottle()) - 49) * 4;
   steering = ((phone.getSteering()) - 49) * 4;  
   moveChair();
 }

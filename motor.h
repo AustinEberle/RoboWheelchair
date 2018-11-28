@@ -21,7 +21,6 @@ private:
     uint8_t pin2;
     uint8_t enable;
     int throttle;
-    byte dir;
 };
 
 Motor::Motor(uint8_t pin2, uint8_t pin1, uint8_t enable)
@@ -30,7 +29,6 @@ Motor::Motor(uint8_t pin2, uint8_t pin1, uint8_t enable)
     this->pin1 = pin2;
     this->enable = enable;
     this->throttle = 0;
-    this->dir = 1;
 }
 
 void Motor::begin()
@@ -68,22 +66,12 @@ void Motor::reverse()
 {
   digitalWrite(pin1, LOW);
   digitalWrite(pin2, HIGH);
-  if (dir != 0) 
-  {
-    this->dir=0;
-    delay(200);
-  }
 }
 
 void Motor::forward()
 {
   digitalWrite(pin1, HIGH);
   digitalWrite(pin2, LOW);
-  if (dir != 1)
-  {
-    this->dir=1;
-    delay(200);
-  }
 }
 
 void Motor::off()
