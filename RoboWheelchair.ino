@@ -44,8 +44,6 @@ Motor lftMotor(/*rLow*/7,/*rHi*/6,/*rEnable*/5);
 Chair chair(lftMotor, rtMotor);
 
 // throttle and steering 
-int prevThrottle = 49;
-int prevSteering = 49;
 int throttle, steering = 0;
 
 // set bluetooth TX and RX pins
@@ -110,9 +108,7 @@ void moveChair()
 
 void loop()
 {
-  prevThrottle = throttle;
-  prevSteering = steering;
-  throttle = ((phone.getThrottle()) - 49) * 4;
-  steering = ((phone.getSteering()) - 49) * 4;  
+  throttle = map(phone.getThrottle(), 0, 99, -255, 255);
+  steering = map(phone.getSteering(), 0, 99, -255, 255); 
   moveChair();
 }
