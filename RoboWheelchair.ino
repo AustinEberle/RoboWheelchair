@@ -89,14 +89,14 @@ void moveChair()
 {
     Serial.print("Throttle: "); Serial.print(throttle); Serial.println();
     Serial.print("Steering: "); Serial.print(steering); Serial.println();
-    if(throttle < 15)
+    if(throttle <= 50)
     {
       throttle *= -1;
       chair.reverse(throttle, steering);
     }
-    else if (throttle > 15)
+    else if (throttle >= 50)
       chair.forward(throttle, steering);
-    else if (throttle < 15 && throttle > -15 && throttle != 0)
+    else if (throttle < 50 && throttle > -50 && throttle != 0)
     {
       delay(200);
     }
