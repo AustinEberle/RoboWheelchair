@@ -2,7 +2,7 @@
 
 See RoboWheelchair.ino for schematic.
 
-MATERIALS:
+Materials Used:
    - 1 Arduino Nano
    - 1 Bluetooth HC-05 Module
    - 1 1kOhm Resistor
@@ -14,7 +14,7 @@ MATERIALS:
    - 2 Motor to Wheel Adapters (custom made for motors, file 
          provided under parts folder)
 
-Links to Materials used:
+Links to Materials Used:
    - 
    - 
    - 
