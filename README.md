@@ -1,12 +1,24 @@
 # RoboWheelchair
 
+See RoboWheelchair.ino for schematic.
+
 MATERIALS:
    - 1 Arduino Nano
+   - 1 Bluetooth HC-05 Module
+   - 1 1kOhm Resistor
+   - 1 2kOhm Resistor
    - 2 Electric Motors
-   - 1 Motor Drivers
+   - 2 Motor Drivers
    - 2 Caster Wheels
    - 2 Motor to Wheel Adapters (custom made for motors, file 
          provided under parts folder)
+
+Links to Materials used:
+   - 
+   - 
+   - 
+   - 
+Total Cost: about $70-$80
 
 Special Thanks to ARDUINOBLUE for providing app and Libraries.
 
