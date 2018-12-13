@@ -7,6 +7,7 @@ MATERIALS:
    - 1 Bluetooth HC-05 Module
    - 1 1kOhm Resistor
    - 1 2kOhm Resistor
+   - 1 Rechargable Battery
    - 2 Electric Motors
    - 2 Motor Drivers
    - 2 Caster Wheels
